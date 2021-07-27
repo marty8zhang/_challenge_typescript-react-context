@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`filters users by name 1`] = `
-<table>
+<table
+  class="table table-bordered table-hover"
+>
   <thead>
     <tr>
       <th>

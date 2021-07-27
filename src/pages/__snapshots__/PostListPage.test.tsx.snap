@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`displays a message in the table when no post is retrieved 1`] = `
-<table>
+<table
+  class="table table-bordered table-hover"
+>
   <thead>
     <tr>
       <th>
@@ -15,6 +17,7 @@ exports[`displays a message in the table when no post is retrieved 1`] = `
   <tbody>
     <tr>
       <td
+        class="text-center"
         colspan="2"
       >
         No Post Found.
@@ -25,7 +28,9 @@ exports[`displays a message in the table when no post is retrieved 1`] = `
 `;
 
 exports[`displays a table of the retrieved posts 1`] = `
-<table>
+<table
+  class="table table-bordered table-hover"
+>
   <thead>
     <tr>
       <th>

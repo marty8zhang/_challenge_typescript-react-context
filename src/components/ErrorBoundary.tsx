@@ -22,7 +22,7 @@ export default class ErrorBoundary extends React.Component<any, ErrorBoundarySta
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.log(error, errorInfo);
+    // console.log(error, errorInfo);
   }
 
   render() {

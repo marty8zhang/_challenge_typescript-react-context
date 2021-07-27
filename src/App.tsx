@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import UserListPage from './pages/UserListPage';
 import PostListPage from './pages/PostListPage';

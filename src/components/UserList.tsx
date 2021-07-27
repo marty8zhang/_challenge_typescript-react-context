@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { withRouter } from 'react-router';
 import { History } from 'history';
+import { Table } from 'react-bootstrap';
 import UserNameFilterContext from '../contexts/UserNameFilterContext';
 
 export interface UserListProps {
@@ -20,7 +21,7 @@ function UserList(props: UserListProps) {
   ));
 
   return (
-    <table>
+    <Table bordered hover responsive>
       <thead>
         <tr>
           <th>Name</th>
@@ -33,11 +34,11 @@ function UserList(props: UserListProps) {
         {userList.length ? userList
           : (
             <tr>
-              <td colSpan={4}>No User Found.</td>
+              <td colSpan={4} className="text-center">No User Found.</td>
             </tr>
           )}
       </tbody>
-    </table>
+    </Table>
   );
 }
 

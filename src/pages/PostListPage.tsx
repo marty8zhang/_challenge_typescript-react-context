@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table } from 'react-bootstrap';
 import { RouteComponentProps, withRouter } from 'react-router';
 import ServicesContext from '../contexts/ServicesContext';
 import { PostGatewayInterface } from '../gateways/PostGateway';
@@ -55,7 +56,7 @@ class PostListPage extends React.Component<PostListPageProps, PostListPageState>
     ));
 
     return (
-      <table>
+      <Table bordered hover responsive>
         <thead>
           <tr>
             <th>Title</th>
@@ -66,11 +67,11 @@ class PostListPage extends React.Component<PostListPageProps, PostListPageState>
           {postList.length ? postList
             : (
               <tr>
-                <td colSpan={2}>No Post Found.</td>
+                <td colSpan={2} className="text-center">No Post Found.</td>
               </tr>
             )}
         </tbody>
-      </table>
+      </Table>
     );
   }
 }
