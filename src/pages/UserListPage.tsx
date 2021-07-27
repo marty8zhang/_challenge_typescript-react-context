@@ -34,6 +34,11 @@ export default class UserListPage extends React.Component<any, UserListState> {
           users,
           filteredUsers: users,
         });
+      })
+      .catch((error) => {
+        this.setState(() => {
+          throw error;
+        });
       });
   }
 

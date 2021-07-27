@@ -24,9 +24,11 @@ class PostListPage extends React.Component<PostListPageProps, PostListPageState>
   componentDidMount() {
     const { match: { params: { userId: paramUserId = '-1' } = {} } = {} } = this.props;
     if (paramUserId.match(/[1-9][0-9]*/) === null || parseInt(paramUserId, 10) <= 0) {
-      throw new Error(
-        'Received an invalid user id in the URI while trying to retrieve user posts.',
-      );
+      this.setState(() => {
+        throw new Error(
+          'Received an invalid user id in the URI while trying to retrieve user posts.',
+        );
+      });
     }
 
     const { postGateway }: {postGateway: PostGatewayInterface} = this.context;
@@ -34,6 +36,11 @@ class PostListPage extends React.Component<PostListPageProps, PostListPageState>
       .then((posts: Post[]) => {
         this.setState({
           posts,
+        });
+      })
+      .catch((error) => {
+        this.setState(() => {
+          throw error;
         });
       });
   }
