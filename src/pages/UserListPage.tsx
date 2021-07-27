@@ -26,7 +26,7 @@ export default class UserListPage extends React.Component<any, UserListState> {
   }
 
   componentDidMount() {
-    const { userGateway }: {userGateway: UserGatewayInterface} = this.context;
+    const { userGateway }: { userGateway: UserGatewayInterface } = this.context;
 
     userGateway.getUsers()
       .then((users: User[]) => {

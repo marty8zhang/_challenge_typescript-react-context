@@ -31,7 +31,7 @@ class PostListPage extends React.Component<PostListPageProps, PostListPageState>
       });
     }
 
-    const { postGateway }: {postGateway: PostGatewayInterface} = this.context;
+    const { postGateway }: { postGateway: PostGatewayInterface } = this.context;
     postGateway.getPostsByUserId(parseInt(paramUserId, 10))
       .then((posts: Post[]) => {
         this.setState({
