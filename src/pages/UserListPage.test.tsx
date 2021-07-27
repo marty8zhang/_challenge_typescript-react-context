@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import UserListPage from './UserListPage';
 import ServicesContext from '../contexts/ServicesContext';
 
@@ -46,9 +48,12 @@ it('filters users by name', async () => {
     },
   };
 
+  const history = createMemoryHistory();
   const { container } = render(
     <ServicesContext.Provider value={mockedServices}>
-      <UserListPage />
+      <Router history={history}>
+        <UserListPage />
+      </Router>
     </ServicesContext.Provider>,
   );
   await screen.findByText('Name 1');

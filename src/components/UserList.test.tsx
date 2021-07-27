@@ -1,5 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import UserList from './UserList';
 import UserNameFilterContext from '../contexts/UserNameFilterContext';
 
@@ -40,6 +42,7 @@ it('displays a table of the retrieved users', async () => {
     },
   ];
 
+  const history = createMemoryHistory();
   const { container } = render(
     <UserNameFilterContext.Provider value={{
       userName: '',
@@ -48,7 +51,9 @@ it('displays a table of the retrieved users', async () => {
       filteredUsers: [users[0], users[2]],
     }}
     >
-      <UserList />
+      <Router history={history}>
+        <UserList />
+      </Router>
     </UserNameFilterContext.Provider>,
   );
 
@@ -59,6 +64,7 @@ it('displays a table of the retrieved users', async () => {
 });
 
 it('displays a message in the table when no user is retrieved', async () => {
+  const history = createMemoryHistory();
   const { container } = render(
     <UserNameFilterContext.Provider value={{
       userName: '',
@@ -67,7 +73,9 @@ it('displays a message in the table when no user is retrieved', async () => {
       filteredUsers: [],
     }}
     >
-      <UserList />
+      <Router history={history}>
+        <UserList />
+      </Router>
     </UserNameFilterContext.Provider>,
   );
   const message = screen.getByText('No User Found.');

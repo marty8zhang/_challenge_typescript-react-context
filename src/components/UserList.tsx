@@ -1,10 +1,17 @@
 import React, { useContext } from 'react';
+import { withRouter } from 'react-router';
+import { History } from 'history';
 import UserNameFilterContext from '../contexts/UserNameFilterContext';
 
-export default function UserList() {
+export interface UserListProps {
+  history: History,
+}
+
+function UserList(props: UserListProps) {
   const { filteredUsers } = useContext(UserNameFilterContext);
+  const { history } = props;
   const userList = filteredUsers.map((user) => (
-    <tr key={user.id}>
+    <tr key={user.id} onClick={() => history.push(`/post/${user.id}`)}>
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.address.city}</td>
@@ -33,3 +40,5 @@ export default function UserList() {
     </table>
   );
 }
+
+export default withRouter(UserList);
