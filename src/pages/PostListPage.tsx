@@ -1,17 +1,18 @@
 import React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import ServicesContext from '../contexts/ServicesContext';
 import { PostGatewayInterface } from '../gateways/PostGateway';
 import Post from '../models/Post';
 
-export interface PostListPageProps {
-  userId: number;
-}
+export interface PostListPageProps extends RouteComponentProps<{
+  userId: string;
+}> {}
 
 export interface PostListPageState {
   posts: Post[];
 }
 
-export default class PostListPage extends React.Component<PostListPageProps, PostListPageState> {
+class PostListPage extends React.Component<PostListPageProps, PostListPageState> {
   constructor(props: Readonly<any>) {
     super(props);
 
@@ -21,10 +22,15 @@ export default class PostListPage extends React.Component<PostListPageProps, Pos
   }
 
   componentDidMount() {
-    const { userId } = this.props;
-    const { postGateway }: {postGateway: PostGatewayInterface} = this.context;
+    const { match: { params: { userId: paramUserId = '-1' } = {} } = {} } = this.props;
+    if (paramUserId.match(/[1-9][0-9]*/) === null || parseInt(paramUserId, 10) <= 0) {
+      throw new Error(
+        'Received an invalid user id in the URI while trying to retrieve user posts.',
+      );
+    }
 
-    postGateway.getPostsByUserId(userId)
+    const { postGateway }: {postGateway: PostGatewayInterface} = this.context;
+    postGateway.getPostsByUserId(parseInt(paramUserId, 10))
       .then((posts: Post[]) => {
         this.setState({
           posts,
@@ -63,3 +69,5 @@ export default class PostListPage extends React.Component<PostListPageProps, Pos
 }
 
 PostListPage.contextType = ServicesContext;
+
+export default withRouter(PostListPage);

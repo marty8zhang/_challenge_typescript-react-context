@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import PostListPage from './PostListPage';
+import { Route, Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import ServicesContext from '../contexts/ServicesContext';
+import PostListPage from './PostListPage';
 
 it('displays a table of the retrieved posts', async () => {
   const mockedGetPostsByUserId = jest.fn().mockResolvedValue([
@@ -24,9 +26,15 @@ it('displays a table of the retrieved posts', async () => {
     },
   };
 
+  const history = createMemoryHistory();
+  history.push('/post/1');
   const { container } = render(
     <ServicesContext.Provider value={mockedServices}>
-      <PostListPage userId={1} />
+      <Router history={history}>
+        <Route path="/post/:userId">
+          <PostListPage />
+        </Route>
+      </Router>
     </ServicesContext.Provider>,
   );
 
@@ -46,11 +54,18 @@ it('displays a message in the table when no post is retrieved', async () => {
     },
   };
 
+  const history = createMemoryHistory();
+  history.push('/post/2');
   const { container } = render(
     <ServicesContext.Provider value={mockedServices}>
-      <PostListPage userId={2} />
+      <Router history={history}>
+        <Route path="/post/:userId">
+          <PostListPage />
+        </Route>
+      </Router>
     </ServicesContext.Provider>,
   );
+
   const message = await screen.findByText('No Post Found.');
   expect(message).toBeInTheDocument();
 
