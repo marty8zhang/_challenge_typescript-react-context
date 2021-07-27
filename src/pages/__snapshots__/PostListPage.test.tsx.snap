@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays a message in the table when no post is retrieved 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Title
+      </th>
+      <th>
+        Page
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td
+        colspan="2"
+      >
+        No Post Found.
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`displays a table of the retrieved posts 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Title
+      </th>
+      <th>
+        Page
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Test Post 1 Title
+      </td>
+      <td>
+        Test post 1 body
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Test Post 2 Title
+      </td>
+      <td>
+        Test post 2 body
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
