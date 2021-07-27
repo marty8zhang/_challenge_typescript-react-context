@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`displays a message in the table when no user is retrieved 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        City
+      </th>
+      <th>
+        Company
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td
+        colspan="4"
+      >
+        No User Found.
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`displays a table of the retrieved users 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        City
+      </th>
+      <th>
+        Company
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Name 1
+      </td>
+      <td>
+        email1@example.com
+      </td>
+      <td>
+        City 1
+      </td>
+      <td>
+        Company 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Name 3
+      </td>
+      <td>
+        email3@example.com
+      </td>
+      <td>
+        City 3
+      </td>
+      <td>
+        Company 3
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
