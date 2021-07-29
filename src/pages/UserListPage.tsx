@@ -13,6 +13,8 @@ interface UserListState {
 }
 
 export default class UserListPage extends React.Component<any, UserListState> {
+  private userNameChangeTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
   constructor(props: Readonly<any>) {
     super(props);
 
@@ -46,18 +48,29 @@ export default class UserListPage extends React.Component<any, UserListState> {
     const { target } = event;
     const userName = target.value;
 
-    this.setState((prevState) => {
-      const { users } = prevState;
-      const filteredUsers = users.filter(
-        (user) => user.name.toLowerCase().indexOf(userName.trim().toLowerCase()) !== -1,
-      );
-
-      return {
-        ...prevState,
-        userName,
-        filteredUsers,
-      };
+    this.setState({
+      userName,
     });
+
+    // For demonstration purposes only. E.g., how to delay the filtering if it involves external
+    // API requests.
+    if (this.userNameChangeTimeoutId) {
+      clearTimeout(this.userNameChangeTimeoutId);
+      this.userNameChangeTimeoutId = null;
+    }
+    this.userNameChangeTimeoutId = setTimeout(() => {
+      this.setState((prevState) => {
+        const { users } = prevState;
+        const filteredUsers = users.filter(
+          (user) => user.name.toLowerCase().indexOf(userName.trim().toLowerCase()) !== -1,
+        );
+
+        return {
+          ...prevState,
+          filteredUsers,
+        };
+      });
+    }, 1000);
   }
 
   render() {

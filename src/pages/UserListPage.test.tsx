@@ -6,6 +6,14 @@ import { Router } from 'react-router-dom';
 import UserListPage from './UserListPage';
 import ServicesContext from '../contexts/ServicesContext';
 
+beforeEach(() => {
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.useRealTimers();
+});
+
 it('filters users by name', async () => {
   const mockedGetUsers = jest.fn().mockResolvedValue([
     {
@@ -56,7 +64,8 @@ it('filters users by name', async () => {
       </Router>
     </ServicesContext.Provider>,
   );
-  await screen.findByText('Name 1');
+  const name1 = await screen.findByText('Name 1');
+  expect(name1).toBeInTheDocument();
 
   const table = container.querySelector('table') as HTMLTableElement;
   expect(table.textContent).toContain('Name 2');
@@ -64,16 +73,22 @@ it('filters users by name', async () => {
 
   const input = screen.getByLabelText('Filter Users by Name:') as HTMLInputElement;
   userEvent.type(input, 'Name 3');
-  expect(table.textContent).not.toContain('Name 1');
-  expect(table.textContent).not.toContain('Name 2');
+  setTimeout(() => {
+    expect(table.textContent).not.toContain('Name 1');
+    expect(table.textContent).not.toContain('Name 2');
+  }, 1100);
 
   userEvent.type(input, '4');
-  expect(table.textContent).not.toContain('Name 1');
-  expect(table.textContent).not.toContain('Name 2');
-  expect(table.textContent).not.toContain('Name 3');
+  setTimeout(() => {
+    expect(table.textContent).not.toContain('Name 1');
+    expect(table.textContent).not.toContain('Name 2');
+    expect(table.textContent).not.toContain('Name 3');
+  }, 1100);
 
   userEvent.clear(input);
-  expect(table.textContent).toContain('Name 1');
-  expect(table.textContent).toContain('Name 2');
-  expect(table.textContent).toContain('Name 3');
+  setTimeout(() => {
+    expect(table.textContent).toContain('Name 1');
+    expect(table.textContent).toContain('Name 2');
+    expect(table.textContent).toContain('Name 3');
+  }, 1100);
 });
