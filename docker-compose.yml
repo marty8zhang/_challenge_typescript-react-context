@@ -9,3 +9,11 @@ services:
         ports:
             - "3000:3000"
         command: "yarn start"
+
+    test:
+        container_name: test_typescript-react-context_test_1
+        image: ovc/test-marty:latest
+        build: .
+        ports:
+            - "3000:3000"
+        command: "yarn test"

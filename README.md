@@ -1,4 +1,6 @@
-# Get Started
+# Getting Started
+
+**Note:** All commands need to be run inside the project root.
 
 ## Locally
 
@@ -10,7 +12,13 @@ $ yarn start
 ## Docker & Docker Compose
 
 ```shell
-$ docker-compose -f "docker-compose.yml" up -d --build
+$ docker-compose -f "docker-compose.yml" up -d --build server
+```
+
+### Testing
+
+```shell
+$ docker-compose -f "docker-compose.yml" up --build test
 ```
 
 # Assumptions
